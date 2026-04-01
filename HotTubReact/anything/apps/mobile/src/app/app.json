@@ -1,0 +1,71 @@
+{
+  "expo": {
+    "ios": {
+      "infoPlist": {
+        "NSCameraUsageDescription": "This app does not use your camera.",
+        "NSContactsUsageDescription": "This app does not use your contacts.",
+        "NSCalendarsUsageDescription": "This app does not use your calendar.",
+        "NSRemindersUsageDescription": "This app does not use your reminders.",
+        "NSMicrophoneUsageDescription": "This app does not use your microphone.",
+        "ITSAppUsesNonExemptEncryption": false,
+        "NSPhotoLibraryUsageDescription": "This app does not use your photo library.",
+        "NSLocationAlwaysUsageDescription": "This app does not use your location.",
+        "NSPhotoLibraryAddUsageDescription": "This app does not use your photo library.",
+        "NSLocationWhenInUseUsageDescription": "This app does not use your location.",
+        "NSSpeechRecognitionUsageDescription": "This app does not use your speech recognition.",
+        "NSCalendarsFullAccessUsageDescription": "This app does not use your calendar.",
+        "NSRemindersFullAccessUsageDescription": "This app does not use your reminders.",
+        "NSLocationAlwaysAndWhenInUseUsageDescription": "This app does not use your location."
+      },
+      "supportsTablet": true,
+      "bundleIdentifier": "com.createinc.4c30deaab398455393ccdd744edd78b1"
+    },
+    "web": {
+      "output": "static",
+      "bundler": "metro",
+      "favicon": "./assets/images/favicon.png"
+    },
+    "icon": "./assets/images/icon.png",
+    "name": "Hot Tub Data Tracker",
+    "slug": "4c30deaa-b398-4553-93cc-dd744edd78b1",
+    "extra": {
+      "eas": {
+        "projectId": "8e36c49e-09a5-482b-824c-a7e6ff7c0e81"
+      },
+      "router": {}
+    },
+    "owner": "create-inc",
+    "scheme": "hottubdatatracker.4c30deaa-b398-4553-93cc-dd744edd78b1",
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#ffffff",
+        "foregroundImage": "./assets/images/adaptive-icon.png"
+      }
+    },
+    "plugins": [
+      "expo-router",
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/images/splash-icon.png",
+          "imageWidth": 200,
+          "resizeMode": "contain",
+          "backgroundColor": "#ffffff"
+        }
+      ]
+    ],
+    "updates": {
+      "url": "https://u.expo.dev/8e36c49e-09a5-482b-824c-a7e6ff7c0e81"
+    },
+    "version": "1.0.0",
+    "experiments": {
+      "typedRoutes": true
+    },
+    "orientation": "portrait",
+    "newArchEnabled": true,
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "userInterfaceStyle": "automatic"
+  }
+}
