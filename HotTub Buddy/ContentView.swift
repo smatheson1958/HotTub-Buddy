@@ -52,7 +52,7 @@ private func seedPreviewSampleDailyLogs(into context: ModelContext) {
         (8, 7.18, 2.6, "10:25:00"),
         (12, 7.28, 3.5, "08:45:00"),
         (20, 7.38, 4.2, "19:00:00"),
-        (27, 7.48, 2.1, "07:30:00"),
+        (27, 7.38, 2.1, "07:30:00"),
     ]
 
     for (day, ph, chlorine, time) in rows {
