@@ -35,6 +35,8 @@ struct WeeklyLogFormView: View {
     @State private var shockType = ""
     @State private var alkUp = ""
     @State private var notes = ""
+    @State private var shockError: String?
+    @State private var alkUpError: String?
 
     @State private var alertMessage: String?
     @State private var showAlert = false
@@ -73,6 +75,17 @@ struct WeeklyLogFormView: View {
             Section {
                 TextField("Shock added", text: $shock)
                     .keyboardType(.decimalPad)
+                    .onChange(of: shock) { _, newValue in
+                        shockError = FormValidation.blurNonNegativeError(
+                            for: newValue,
+                            label: "Shock added"
+                        )
+                    }
+                if let shockError {
+                    Text(shockError)
+                        .font(.footnote)
+                        .foregroundStyle(.red)
+                }
                 Picker("Shock type", selection: $shockType) {
                     Text("—").tag("")
                     ForEach(shockOptions, id: \.1) { label, value in
@@ -81,6 +94,17 @@ struct WeeklyLogFormView: View {
                 }
                 TextField("Alkalinity Up added", text: $alkUp)
                     .keyboardType(.decimalPad)
+                    .onChange(of: alkUp) { _, newValue in
+                        alkUpError = FormValidation.blurNonNegativeError(
+                            for: newValue,
+                            label: "Alkalinity Up"
+                        )
+                    }
+                if let alkUpError {
+                    Text(alkUpError)
+                        .font(.footnote)
+                        .foregroundStyle(.red)
+                }
             } header: {
                 Text("Shock & adjustments")
             }
