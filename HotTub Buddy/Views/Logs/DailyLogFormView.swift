@@ -23,6 +23,9 @@ struct DailyLogFormView: View {
     @State private var addedPhUp: String = ""
     @State private var addedPhDown: String = ""
     @State private var notes: String = ""
+    @State private var addedSanitizerError: String?
+    @State private var addedPhUpError: String?
+    @State private var addedPhDownError: String?
 
     @State private var alertMessage: String?
     @State private var showAlert = false
@@ -73,10 +76,43 @@ struct DailyLogFormView: View {
             Section {
                 TextField("Added sanitizer", text: $addedSanitizer)
                     .keyboardType(.decimalPad)
+                    .onChange(of: addedSanitizer) { _, newValue in
+                        addedSanitizerError = FormValidation.blurNonNegativeError(
+                            for: newValue,
+                            label: "Added sanitizer"
+                        )
+                    }
+                if let addedSanitizerError {
+                    Text(addedSanitizerError)
+                        .font(.footnote)
+                        .foregroundStyle(.red)
+                }
                 TextField("pH Up added", text: $addedPhUp)
                     .keyboardType(.decimalPad)
+                    .onChange(of: addedPhUp) { _, newValue in
+                        addedPhUpError = FormValidation.blurNonNegativeError(
+                            for: newValue,
+                            label: "pH Up"
+                        )
+                    }
+                if let addedPhUpError {
+                    Text(addedPhUpError)
+                        .font(.footnote)
+                        .foregroundStyle(.red)
+                }
                 TextField("pH Down added", text: $addedPhDown)
                     .keyboardType(.decimalPad)
+                    .onChange(of: addedPhDown) { _, newValue in
+                        addedPhDownError = FormValidation.blurNonNegativeError(
+                            for: newValue,
+                            label: "pH Down"
+                        )
+                    }
+                if let addedPhDownError {
+                    Text(addedPhDownError)
+                        .font(.footnote)
+                        .foregroundStyle(.red)
+                }
             } header: {
                 Text("Chemicals added")
             }

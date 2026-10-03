@@ -5,7 +5,7 @@
 
 import Foundation
 
-enum ShockTypes {
+nonisolated enum ShockTypes {
     /// Shock types that add sanitizer (exclude periods from consumption calc).
     static let sanitizerAdding: Set<String> = [
         "cal-hypo",

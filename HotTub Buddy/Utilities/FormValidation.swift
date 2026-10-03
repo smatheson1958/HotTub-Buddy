@@ -5,7 +5,9 @@
 
 import Foundation
 
-enum FormValidation {
+/// Pure validation helpers. Explicitly nonisolated so they remain callable from
+/// field blur/`onChange` closures under `SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor`.
+nonisolated enum FormValidation {
     static func isFutureDate(ymd: String) -> Bool {
         let f = DateFormatter()
         f.calendar = Calendar(identifier: .gregorian)
@@ -15,6 +17,11 @@ enum FormValidation {
         let start = Calendar.current.startOfDay(for: d)
         let today = Calendar.current.startOfDay(for: Date())
         return start > today
+    }
+
+    /// Field-level check used when a chemical-add text field loses focus / changes.
+    static func blurNonNegativeError(for text: String, label: String = "Value") -> String? {
+        validateOptionalNonNegative(text, label: label)
     }
 
     static func validateDailyLog(
@@ -36,9 +43,9 @@ enum FormValidation {
         if let e = validateOptionalRange(sanitizerCombined, min: 0, max: 20, label: "Combined/total sanitizer") {
             errors.append(e)
         }
-        if let e = validateOptionalNonNegative(addedSanitizer, label: "Added sanitizer") { errors.append(e) }
-        if let e = validateOptionalNonNegative(addedPhUp, label: "pH Up") { errors.append(e) }
-        if let e = validateOptionalNonNegative(addedPhDown, label: "pH Down") { errors.append(e) }
+        if let e = blurNonNegativeError(for: addedSanitizer, label: "Added sanitizer") { errors.append(e) }
+        if let e = blurNonNegativeError(for: addedPhUp, label: "pH Up") { errors.append(e) }
+        if let e = blurNonNegativeError(for: addedPhDown, label: "pH Down") { errors.append(e) }
 
         return errors
     }
@@ -59,8 +66,8 @@ enum FormValidation {
         }
         if let e = validateOptionalRange(alkalinity, min: 0, max: 300, label: "Total alkalinity") { errors.append(e) }
         if let e = validateOptionalRange(copper, min: 0, max: 5, label: "Copper") { errors.append(e) }
-        if let e = validateOptionalNonNegative(shock, label: "Shock added") { errors.append(e) }
-        if let e = validateOptionalNonNegative(alkUp, label: "Alkalinity Up") { errors.append(e) }
+        if let e = blurNonNegativeError(for: shock, label: "Shock added") { errors.append(e) }
+        if let e = blurNonNegativeError(for: alkUp, label: "Alkalinity Up") { errors.append(e) }
 
         let hasAny =
             !combined.trimmingCharacters(in: .whitespaces).isEmpty
@@ -113,7 +120,7 @@ enum FormValidation {
     }
 }
 
-enum LogFormFormatting {
+nonisolated enum LogFormFormatting {
     static func todayYMD() -> String {
         let f = DateFormatter()
         f.calendar = Calendar(identifier: .gregorian)
